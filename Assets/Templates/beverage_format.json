@@ -1,0 +1,26 @@
+{
+    "type":"quick_reply",
+    "msgid":"qr1",
+    "content":{
+       "type":"text",
+       "header":"Menon Health Tech PvtLtd",
+       "text":"What bevarages did you have?"
+    },
+    "options":[
+       {
+          "type":"text",
+          "title":"Tea",
+          "postbackText": "dev-defined-postback1"
+       },
+       {
+          "type":"text",
+          "title":"Coffee",
+          "postbackText": "dev-defined-postback2"
+       },
+       {
+          "type":"text",
+          "title":"Milk",
+          "postbackText": "dev-defined-postback3"
+       }
+    ]
+}

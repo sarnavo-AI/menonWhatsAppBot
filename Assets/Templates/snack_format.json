@@ -1,0 +1,60 @@
+{
+    "type":"list",
+    "title":"Menon Health Tech PvtLtd",
+    "body":"What did you have for Snacks?",
+    "msgid":"list1",
+    "globalButtons":[
+       {
+          "type":"text",
+          "title":"Snacks list"
+       }
+    ],
+    "items":[
+       {
+          "title":"first Section",
+          "subtitle":"first Subtitle",
+          "options":[
+             {
+                "type":"text",
+                "title":"Puffed Rice",
+                "postbackText":"section 1 row 1 postback payload"
+             },
+             {
+                "type":"text",
+                "title":"Biscuit",
+                "postbackText":"section 1 row 2 postback payload"
+             },
+             {
+                "type":"text",
+                "title":"Bhadang",
+                "postbackText":"section 1 row 3 postback payload"
+             },
+             {
+                 "type":"text",
+                 "title":"Chivda",
+                 "postbackText":"section 1 row 3 postback payload"
+             },
+             {
+                 "type":"text",
+                 "title":"Vada-pav",
+                 "postbackText":"section 1 row 3 postback payload"
+             },
+             {
+                 "type":"text",
+                 "title":"Sandwich",
+                 "postbackText":"section 1 row 3 postback payload"
+             },
+             {
+                 "type":"text",
+                 "title":"Burger",
+                 "postbackText":"section 1 row 3 postback payload"
+             },
+             {
+                 "type":"text",
+                 "title":"8 Idali",
+                 "postbackText":"section 1 row 3 postback payload"
+             }
+          ]
+       }
+    ]
+ }

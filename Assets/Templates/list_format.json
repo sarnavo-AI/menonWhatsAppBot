@@ -1,0 +1,20 @@
+{
+   "type":"list",
+   "title":"Menon Health Tech PvtLtd",
+   "body":"What did you have for Breakfast?",
+   "msgid":"list1",
+   "globalButtons":[
+      {
+         "type":"text",
+         "title":"Breakfast list"
+      }
+   ],
+   "items":[
+      {
+         "title":"first Section",
+         "subtitle":"first Subtitle",
+         "options":[
+         ]
+      }
+   ]
+}
