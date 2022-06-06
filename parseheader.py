@@ -1,22 +1,23 @@
 from parsecsv import get_csv_data
 from parsejson import get_json_data
 
-def get_header_data(foodType):
-    [header, rows] = get_csv_data(foodType)
-    finalHeaderList = []
+def get_header_data(file_type):
+    [header, rows] = get_csv_data(file_type)
+    final_header_list = []
 
-    mobileNumberIndex = header.index('mobile_number')
-    timeIndex = header.index('time')
+    mobile_number_index = header.index('mobile_number')
+    time_index = header.index('time')
 
-    jsonList = get_json_data(foodType)
+    json_list = get_json_data(file_type)
+
     for index in range(len(rows)):
-        mobileNumber = rows[index][mobileNumberIndex]
+        mobile_number = rows[index][mobile_number_index]
 
-        timeSplit = rows[index][timeIndex].split(':')
-        time = int(timeSplit[0]) * 60 + int(timeSplit[1])
+        time_split = rows[index][time_index].split(':')
+        time = int(time_split[0]) * 60 + int(time_split[1])
 
-        json = jsonList[index]
+        json = json_list[index]
 
-        finalHeaderList.append((time, mobileNumber, json))
+        final_header_list.append((time, mobile_number, json))
 
-    return finalHeaderList;
+    return final_header_list;

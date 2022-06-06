@@ -1,11 +1,10 @@
-import re
 from flask import Flask, request
 from parsereply import generate_reply_text
 from main import send_message
 from csv import writer
 from datetime import date, datetime
 
-replyDict = generate_reply_text()
+reply_dict = generate_reply_text()
 user_queue = {}
 
 app = Flask(__name__)
@@ -15,8 +14,8 @@ def send_reply(data):
     user_number = data['payload']['sender']['dial_code']
     user_name = data['payload']['sender']['name']
 
-    user_queue[user_number] = [user_name, user_item, replyDict[user_item][0]]
-    reply_json = replyDict[user_item][1]
+    user_queue[user_number] = [user_name, user_item, reply_dict[user_item][0]]
+    reply_json = reply_dict[user_item][1]
     send_message(user_number, reply_json)
 
 def store_reply(data):

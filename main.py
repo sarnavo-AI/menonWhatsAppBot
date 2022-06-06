@@ -4,19 +4,19 @@ import datetime, time
 from concurrent.futures import ThreadPoolExecutor
 import requests, json
 
-def send_message(number, jsonData):
+def send_message(user_number, json_data):
     # Loading JSON
-    tempPayload = json.dumps(jsonData, separators=(',', ':'))
+    temp_payload = json.dumps(json_data, separators=(',', ':'))
 
     # Parsing JSON
-    utfCodes = { '%20' : " ", '%22' : '"', '%5B' : '[', '%5D' : ']',  '%7B' : '{', '%7D' : '}'}
-    for [key, value] in utfCodes.items():
-        tempPayload = tempPayload.replace(value, key)
+    utf_codes = { '%20' : " ", '%22' : '"', '%5B' : '[', '%5D' : ']',  '%7B' : '{', '%7D' : '}'}
+    for [key, value] in utf_codes.items():
+        temp_payload = temp_payload.replace(value, key)
 
     # Chat API
     url = "https://api.gupshup.io/sm/api/v1/msg"
-    customerNumber = number
-    payload = "channel=whatsapp&source=917834811114&destination=91" + customerNumber + "&message=" + tempPayload + "&src.name=MenonHealthTechPvtLtd"
+    customer_number = user_number
+    payload = "channel=whatsapp&source=917834811114&destination=91" + customer_number + "&message=" + temp_payload + "&src.name=MenonHealthTechPvtLtd"
 
     headers = {
         "Accept": "application/json",
@@ -28,61 +28,59 @@ def send_message(number, jsonData):
     print(response.text)
 
 def init():
-    timeDict = OrderedDict()
+    time_dict = OrderedDict()
 
-    foodTypes = ['breakfast']
-    for foodType in foodTypes:
-        headerData = get_header_data(foodType)
-        for data in headerData:
-            if data[0] in timeDict:
-                timeDict[data[0]].append([data[1], data[2]])
+    file_types = ['breakfast', 'lunch', 'dinner']
+    for file_type in file_types:
+        header_data = get_header_data(file_type)
+        for data in header_data:
+            if data[0] in time_dict:
+                time_dict[data[0]].append([data[1], data[2]])
             else:
-                timeDict[data[0]] = [[data[1], data[2]]]
+                time_dict[data[0]] = [[data[1], data[2]]]
 
-    # timeDict[1054] = [['9748366268', {'type': 'text', 'text': 'What did you have for your lunch? \n https://forms.gle/nH8apfyPtrT463mV8'}]]
+    # time_dict[1054] = [['9748366268', {'type': 'text', 'text': 'What did you have for your lunch? \n https://forms.gle/nH8apfyPtrT463mV8'}]]
 
-    for key in timeDict.keys():
-        print(key)
+    # for key in time_dict.keys():
+    #     print(key)
 
-    # currentTime = datetime.time(hour=0, minute=0, second=0)
-    currentTime = datetime.datetime.now()
-    currentTime = int(currentTime.strftime("%H")) * 60 + int(currentTime.strftime("%M"))
-    
-    # print(currentTime)
+    # current_time = datetime.time(hour=0, minute=0, second=0)
+    current_time = datetime.datetime.now()
+    current_time = int(current_time.strftime("%H")) * 60 + int(current_time.strftime("%M"))
 
-    timeStampList = list(timeDict.keys())
-    totalTimeStamps = len(timeStampList)
-    currentTimeStampIndex = 0
+    time_stamp_list = list(time_dict.keys())
+    total_time_stamps = len(time_stamp_list)
+    current_time_index = 0
 
-    requiredTime = timeStampList[currentTimeStampIndex]
+    next_time = time_stamp_list[current_time_index]
 
     while True:
-        if requiredTime - currentTime < 0:
-            currentTimeStampIndex += 1
-            if currentTimeStampIndex == totalTimeStamps:
+        if next_time - current_time < 0:
+            current_time_index += 1
+            if current_time_index == total_time_stamps:
                 break
-            requiredTime = timeStampList[currentTimeStampIndex]
+            next_time = time_stamp_list[current_time_index]
             continue
 
-        time.sleep((requiredTime - currentTime) * 60)   
+        time.sleep((next_time - current_time) * 60)   
         
         start = time.perf_counter()
         with ThreadPoolExecutor() as executor:
-            for metaData in timeDict[requiredTime]:
-                number = metaData[0]
-                jsonData = metaData[1]
+            for meta_data in time_dict[next_time]:
+                number = meta_data[0]
+                json_data = meta_data[1]
                 
-                executor.submit(send_message, number, jsonData)
+                executor.submit(send_message, number, json_data)
 
         finish = time.perf_counter()
         print(finish - start)
-        currentTime = requiredTime
-        currentTimeStampIndex += 1
+        current_time = next_time
+        current_time_index += 1
 
-        if currentTimeStampIndex == totalTimeStamps:
+        if current_time_index == total_time_stamps:
             break
 
-        requiredTime = timeStampList[currentTimeStampIndex]
+        next_time = time_stamp_list[current_time_index]
 
 if __name__ == '__main__':
     init()

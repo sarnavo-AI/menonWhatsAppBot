@@ -4,11 +4,11 @@ from parsejson import get_json_data
 def generate_reply_text():
     [header, rows] = get_csv_data('items_units')
 
-    jsonList = get_json_data('items_units')
-    replyDict = {}
+    json_list = get_json_data('items_units')
+    reply_dict = {}
 
     for index in range(len(rows)):
-        replyDict[rows[index][0]] = [rows[index][1], jsonList[index]]
+        reply_dict[rows[index][0]] = [rows[index][1], json_list[index]]
 
-    return replyDict
+    return reply_dict
 

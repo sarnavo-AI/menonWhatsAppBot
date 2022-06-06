@@ -1,18 +1,21 @@
 import csv
+from fileinput import close
 
-def get_csv_data(foodType):
-    fileName = foodType + '_fetching.csv'      
-    file = open('./Assets/Data/Retrive/' + fileName)
-    csvreader = csv.reader(file)
+def get_csv_data(file_type):
+    file_name = file_type + '_fetching.csv'      
+    with open('./Assets/Data/Retrive/' + file_name) as file:
+        csv_reader = csv.reader(file)
 
-    header = []
-    header = next(csvreader)
+        header = []
+        header = next(csv_reader)
 
-    rows = []
-    for row in csvreader:
-        rows.append(row)
+        rows = []
+        for row in csv_reader:
+            rows.append(row)
 
-    return [header, rows]
+        file.close()
+
+        return [header, rows]
 
 if __name__ == "__main__":
     pass
