@@ -82,5 +82,7 @@ def init():
 
         next_time = time_stamp_list[current_time_index]
 
+    return True    
+
 if __name__ == '__main__':
     init()
